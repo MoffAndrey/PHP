@@ -96,7 +96,7 @@
 	<p>Возведение в степень: <?= power($n, $k); ?></p>
 </body>
 <footer>
-	<br><br>
+	<br><br><br>
 	<p>Copyright &copy; 2014-<?php echo date("Y"); ?>. Все права защищены. </p>
 </footer>
 </html>
