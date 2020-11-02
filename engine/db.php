@@ -43,3 +43,11 @@ function queryReview($connection, int $id){
 	return mysqli_fetch_all($res, MYSQLI_ASSOC);
 
 }
+
+function getUser($connection, string $login, $pass) {
+	$sql = "SELECT * FROM users 
+            WHERE login = '{$login}' 
+            AND password = '{$pass}'";
+	$res = mysqli_query($connection, $sql);
+	return mysqli_fetch_all($res, MYSQLI_ASSOC)[0];
+}

@@ -1,10 +1,25 @@
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT'] . "/../config/main.php";
 require_once ENGINE_DIR . "db.php";
+require_once ENGINE_DIR . "base.php";
 
+
+session_start();
+//unset($_SESSION['basket_items']);
 $connection = sqlConnection();
 $catalog = queryAll($connection);
+
+
+if($_SERVER['REQUEST_METHOD'] == 'POST') {
+		if(isset($_POST['basket_name'])) {
+			echo "<br>В корзину добавлено: " . $_POST['basket_name'];
+			addToBasket($_POST['basket_id'], $_POST['basket_name'], $_POST['basket_price']);
+			//redirect($_SERVER['REQUEST_URI']);
+		}
+	}
+
 mysqli_close($connection);
+
 ?>
 
 <!DOCTYPE html>
@@ -18,6 +33,12 @@ mysqli_close($connection);
 </head>
 <body>
 	<div class="container">
+		<form action="admin/login.php">
+    		<input type="submit" value="Авторизоваться">
+		</form>
+		<form action="basket.php">
+    		<input type="submit" value="Посмотреть корзину">
+		</form>
 			<div class="gallery">
 				<h2 class="gallery-h2">Our Gallery</h2>
 				<?php include VIEWS_DIR . "catalog.php"; ?>
